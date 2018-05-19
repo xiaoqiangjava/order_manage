@@ -1,0 +1,99 @@
+java网络爬虫知识记录
+1.java.net.URL可以对相应的web服务器发送请求并获取响应文档,java.net.URL类有一个默认的构造函数,使用URL地址作为参数,构造URL对象:
+URL pageURL = new URL(path);接着通过获得的URL对象获取网络流,进而像操作本地文件一样操作网络资源:InputStream input = pageURL.openStream();
+但是在实际操作中,网络环境比较复杂,仅仅是使用java.net中的API来模拟IE客户端的工作代码量非常大,需要处理HTTP返回的状态码,设置HTTP代理,处理HTTPS协议等工作,为了便于
+应用程序的开发,实际项目开发中常常使用Apache的HTTP客户端开源项目--HTTPClient.它完全能够处理HTTP连接种的各种问题.只需要在项目中引入HTTPClient.jar包就可以模拟IE
+来获取网页内容.例如:
+1>使用get方式向服务器发送请求
+	//创建一个客户端,类似于打开一个浏览器
+	HTTPClient httpClient = new HTTPClient();
+	//创建一个get方法,类似于在浏览器地址栏中输入一个地址,使用get方式对http://www.xiaoqiangspider.com发送请求
+	GetMethod getMothod = new GetMethod("http://www.xiaoqiangspider.com");
+	//回车,获取响应的状态码(执行请求)
+	int statusCode = httpClient.executeMethod(getMethod);
+	//查看命中情况,可以获得的东西还有很多,比如header,cookies
+	//getMethod.getResponseBodyAsString()方法能够以字符串的方式返回请求的内容.
+	//在实际的项目中需要将返回的内容写入本地文件并保存
+	System.out.println("response:"+getMethod.getResponseBodyAsString());
+	//释放资源,关闭连接,以免造成资源消耗
+	getMothod.releaseConnection();
+	//使用get()方法向服务器发送请求是把参数作为URL的一部分发送给服务器,而HTTP协议本身对URL字符串的长度有所限制,所以不能传递太多的参数到服务器端,为了避免这种情况
+	//常常使用post()方法向服务器发送请求.
+	
+2>HTTPClient对post() 方法也有很好的支持
+	//得到post()方法
+	PostMethod postMethod = new PostMethod("http://www.xiaoqiangspider.com");
+	//使用数组传递参数-->NameValuePair
+	NameValuePair[] postData = new NameValuePair[2];
+	//设置参数
+	postData[0] = new NameValue("武器","抢");
+	postData[1] = new NameValue("什么枪","神枪");
+	//回车(发送请求),获取响应状态码
+	int statusCode = httpClient.executePostMethod(postMethod);]\
+	//查看命中情况,可以获得的东西还有很多,比如header,cookies
+	System.out.println("response"+postMothod.getResponseBodyAsString());
+	
+2.有时我们执行爬虫程序的机器不能直接访问web资源,而是需要HTTP代理服务器去访问,HTTPClient对代理服务器也有很好的支持,如:
+	//创建httpClient相当于打开一个HTTP代理
+	HTTPClient httpClient = new HTTPClient();
+	//设置代理服务器的IP地址和端口
+	httpClient.getHostConfiguration().setProxy("192.168.0.1",9527);
+	//告诉httpClient,使用抢先认证,否则你会收到"你没有资格"的恶果
+	httpClient.getParams().setAuthenticationPreemptive(true);
+	//MyProxyCredentialsProvider()返回代理的credetials(username/password);
+	httpClient.getParams().setParameter(CredentialsProvider.PROVIDER, new MyProxyCredentialsProvider());
+	//设置代理服务器的用户名和密码
+	httpClient.getState().setProxyCredentials(new AuthScope("192.168.0.1", AuthScope.ANY_PORT,AuthScope.ANY_REALM), 
+											  new UsernamePasswordCredentials("username","password"));
+	
+	
+	body > div:nth-child(9) > div > div.itemInfo-wrap > div.sku-name
+	body > div:nth-child(9) > div > div.itemInfo-wrap > div.summary.summary-first > div > div.summary-price.J-summary-price > div.dd > span.p-price > span.price.J-p-4206468
+	
+	ajax 请求不能下载文件;切记切记;
+		BufferedInputStream bis = null;
+//		ServletOutputStream fos = null;
+//        try {
+//        	response.setCharacterEncoding("utf-8");
+//        	response.setContentType("application/octet-stream");
+//			response.addHeader("Content-Disposition", "attachment;filename="+URLEncoder.encode(fileName,"UTF-8") + ".zip");
+//			response.setContentLength((int)new File(path + "/" + fileName + ".zip").length());
+//			bis = new BufferedInputStream(new FileInputStream(path + File.separator + fileName + ".zip"));
+//			byte[] buff = new byte[10*1024];
+//			int len;
+//			fos = response.getOutputStream();
+//			while((len = bis.read(buff))!=-1){
+//				fos.write(buff, 0, len);
+//			}
+//		} catch (UnsupportedEncodingException e) {
+//			e.printStackTrace();
+//		} catch (FileNotFoundException e) {
+//			e.printStackTrace();
+//			throw new RuntimeException(e);
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		} finally {
+//			if(bis != null){
+//				try {
+//					bis.close();
+//				} catch (IOException e) {
+//					e.printStackTrace();
+//				}
+//			}
+//			if(fos != null){
+//				try {
+//					fos.close();
+//				} catch (IOException e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		}
+//	
+	
+	
+	
+	
+	
+	
+	
+	

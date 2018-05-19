@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//itatis.apache.org//DTD Mapper 3.0//EN"
+	"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+	
+<mapper namespace="cn.bsnt.web.order.dao.UserDao">
+	<select id="findUserByUserId" resultType="cn.bsnt.web.order.entity.User">
+		select 
+			t_user_id as id,t_user_name as name,t_user_password as password,
+			t_user_nick as nick,t_user_token as token
+		from 
+			t_user
+		where 
+			t_user_id=#{userId}
+	</select>
+	<select id="findUserByUsername" resultType="cn.bsnt.web.order.entity.User">
+		select 
+			t_user_id as id,t_user_name as name,t_user_password as password,
+			t_user_nick as nick,t_user_token as token,t_user_area as area
+		from 
+			t_user
+		where 
+			t_user_name=#{username}
+	</select>
+	<insert id="addUser" parameterType="cn.bsnt.web.order.entity.User">
+		insert into 
+			t_user
+			(t_user_name,t_user_password,t_user_nick,t_user_token,t_user_area,t_user_create_time)
+		values
+			(#{name},#{password},#{nick},#{token},#{area},#{creatTime})
+	</insert>
+	<update id="updateUserByParams" parameterType="map">
+		update
+			t_user
+		<set>
+			<trim suffixOverrides=",">
+				<if test="username!=null">
+					t_user_name = #{username},
+				</if>
+				<if test="passwoard!=null">
+					t_user_password = #{password},
+				</if>
+				<if test="nick!=null">
+					t_user_nick = #{nick},
+				</if>
+				<if test="token!=null">
+					t_user_token = #{token},
+				</if>
+				<if test="role!=null">
+					t_user_role = #{role},
+				</if>
+				<if test="flag!=null">
+					t_user_role = #{flag},
+				</if>
+			</trim>
+		</set>
+		<where>
+			t_user_id = #{userId}
+		</where>
+	</update>
+</mapper>

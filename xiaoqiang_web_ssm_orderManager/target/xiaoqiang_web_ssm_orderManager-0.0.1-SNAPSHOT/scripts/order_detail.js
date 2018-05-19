@@ -1,0 +1,61 @@
+function editDetailAction(){
+	//console.log("订单详情");
+	$('.edit_plate').fadeOut();
+	$('#order_detail').fadeIn();
+	var orderIndex = $(this).parent().parent().data('orderIndex');
+	//console.log("detail::"+orderIndex);
+	var productId = model.orderList[orderIndex].shopId;
+	//console.log(productId);
+	var orderCode = model.orderList[orderIndex].orderCode;
+	var aliCode = model.orderList[orderIndex].aliCode;
+	var logisticsCode = model.orderList[orderIndex].logisticsCode;
+	var receiverName = model.orderList[orderIndex].receiverName;
+	var receiverPhone = model.orderList[orderIndex].receiverPhone;
+	var receiverAdd = model.orderList[orderIndex].receiverAdd;
+	var logisticsCompany = model.orderList[orderIndex].logisticsCompany;
+	var transfer = model.orderList[orderIndex].transfer;
+	var payStatus = model.orderList[orderIndex].status;
+	var orderId = model.orderList[orderIndex].orderId;
+	var payChnl = model.orderList[orderIndex].payChnl;
+	var productCode = model.orderList[orderIndex].productCode;
+	var productName = model.orderList[orderIndex].productName;
+	var orderDate = model.orderList[orderIndex].orderDate;
+	orderDate = new Date(orderDate);
+	orderDate = formatDate(orderDate);
+	var size = model.orderList[orderIndex].size;
+	var color = model.orderList[orderIndex].color;
+	var price = model.orderList[orderIndex].price;
+	price = Number(price).toFixed(2);
+	var count = model.orderList[orderIndex].count;
+	var totalMoney = price*count;
+	totalMoney = Number(totalMoney).toFixed(2);
+	var remark = model.orderList[orderIndex].remark;
+	$('#detail_order_date').val(orderDate);
+	$('#detail_size').val(size);
+	$('#detail_color').val(color);
+	$('#detail_price').val(price);
+	$('#detail_count').val(count);
+	$('#detail_total_money').val(totalMoney);
+	$('#detail_remark').val(remark);
+	$('#detail_shop_id').val(productId);
+	$('#detail_order_code').val(orderCode);
+	$('#detail_ali_code').val(aliCode);
+	$('#detail_sorder_code').val(orderCode);
+	$('#detail_logistics_code').val(logisticsCode);
+	$('#detail_receiver_name').val(receiverName);
+	$('#detail_receiver_phone').val(receiverPhone);
+	$('#detail_receiver_add').val(receiverAdd);
+	$('#detail_logistics_company').val(logisticsCompany);
+	$('#detail_transfer').val(transfer);
+	$('#detail_status').val(payStatus);
+	$('#detail_order_id').val(orderId);
+	$('#detail_pay_chnl').val(payChnl);
+	$('#detail_shop_name').val(productName);
+	$('#detail_shop_code').val(productCode);
+	
+	$('.cancle_button').click(function(){
+		$('#order_detail').fadeOut();
+		$('#order').fadeIn();
+	});
+	
+}

@@ -1,0 +1,43 @@
+#shop_info{
+	margin:10px 20px;
+	border:2px solid #ddd;
+	height:600px;
+	text-align:center;
+	overflow-x:scroll;	
+}
+#shop_table{
+	width:100%;
+	text-align:center;
+	font-size: small;
+}
+#shop_table input{
+	cursor: pointer;
+}
+#delete_div{
+	text-align: left;
+	margin:10px 0px;
+}
+#delete_shop{
+	border: 2px solid #999;
+	width:90px;
+	height:30px;
+	background-color:#13a8ee;
+	border-radius:3px;
+	margin-left: 20px;
+	
+}
+#update_shop_info{
+	display: none;
+	border:2px solid #999;
+	margin:10px 20px;
+	overflow: hidden;
+}
+#refresh_shop{
+	width:100px;
+	height:40px;
+	cursor: pointer;
+	background-color: #13a8ee;
+	margin-left: 50px;
+	border-radius: 6px;
+	font-size: 14pt;
+}

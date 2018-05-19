@@ -1,0 +1,341 @@
+body{
+	margin:0px auto;
+}
+#global{
+	width:100%;
+	margin:0px auto;
+	position: absolute;
+}
+#logo{
+	width:100%;
+	height:120px;
+	text-align:center;
+	margin:0px auto;
+	background-color:#399a58;	
+}
+#logo h1{
+	
+}
+#order_date,#start_date,#end_date,#shelf_add_date,#shelf_start_date,#shelf_end_date{
+	background-image: url("../images/calender.png");
+	background-position: right;
+	background-repeat: no-repeat;
+}
+#login_code{
+	position:absolute;
+	top:85px;
+	right:10%;
+	font-size: large;
+	font-style: italic;
+}
+#exit{
+	position:absolute;
+	top:85px;
+	right:5%;
+	font-size: large;
+}
+#time{
+	position: absolute;
+	top:85px;
+	left:50%;
+	font-size: large;
+}
+h1,img{
+	float: left;
+}
+#logo h1{
+	line-height: 2.1em;
+	margin-left: 10px;
+}
+#menu{
+	width:10.1%;
+	height:900px;
+	float:left;
+	border-top:2px solid #000;
+	background-color: #bbb;
+	text-align: center;
+	font-size: 24px;
+}
+.menu_button{
+	width:100%;
+	height:35px;
+	border-right:2px;
+}
+#menu_list{
+	text-align:center;
+	width:100%;
+	height:40px;
+	background-color:#399a58;
+	margin:0px auto;
+}
+#menu_list_1{
+	height:40px;
+	text-align:center;
+}
+#menu_list_2{
+	height:20px;
+	float:left;
+	margin-left:10px;
+	margin-top:12px;
+}
+#menu_list span{
+	line-height: 1.5em;
+}
+.edit_plate{
+	width:89.9%;
+	height:900px;
+	float:left;
+	background:#eee ;
+	display: none;
+}
+#menu a{
+	font-size:16px;
+}
+.select_1{
+	margin:5px 20px 10px 40px;
+	overflow: hidden;
+}
+#pay_status{
+	margin:5px 20px 10px 40px;
+}
+.select_1 input{
+	border:1px solid #aaa;
+	height:20px;
+	border-radius: 5px;
+}
+
+#select_list{
+	margin:10px 20px;
+	border:2px solid #ddd;
+	background-color: #efefef;
+}
+#select_info{
+	margin:10px 20px;
+	border:2px solid #ddd;
+	height:600px;
+	text-align:center;
+	overflow-x:scroll;
+}
+.codeInfo{
+	margin:10px 20px;
+	border:2px solid #ddd;
+	height:700px;
+	text-align:center;
+	overflow-x:scroll;
+}
+.code_template_title{
+	background-color: #aaa;
+	padding-left:40px;
+	margin: 1px 20px;
+	font-style: normal;
+	font-size: 1.5em;
+}
+.code_input{
+	margin:12px 20px 1px 20px;
+}
+#select_title{
+	background-color: #aaa;
+	padding-left:40px;
+	font-style: normal;
+	font-size: 1.5em;
+}
+.find_button,#refresh{
+	width:100px;
+	height:40px;
+	cursor: pointer;
+	background-color: #13a8ee;
+	margin-left: 50px;
+	border-radius: 6px;
+	font-size: 14pt;
+}
+.checkbox{
+	background-color: #aaa;
+	cursor: pointer;
+}
+.select_1 div{
+	float: left;
+	padding-top: 10px;
+	padding-bottom: 5px;
+}
+.date{
+	cursor: pointer;
+}
+#edit{
+	display: block;
+	background: url("../images/bg_pic(1).png");
+}
+.font{
+	font-size: 12pt;
+	font-weight: bold;
+}
+table,th,td{
+	border:1px solid #333;
+	border-collapse: collapse;
+}
+th{
+	background-color: #ddd;
+}
+th,tr{
+	line-height: 1.5em;
+}
+table{
+	width:100%;
+	margin:2px auto;
+	font-size: small;
+}
+.table_fix{
+	table-layout: fixed;
+}
+td{
+	word-break:break-all;
+}
+#edit div{
+	margin-top:100px;
+	margin-left:80px;
+	font-size: 30px;
+}
+.checked{
+	background:url("../images/bg_liebiao.png");
+}
+.menu_child_list{
+	display: none;
+}
+#new_arrival,#product_shelf,#code_all,#code_check{
+	background-color: #efefef;
+}
+.sub_menu{
+	background-color: #efefef;
+}
+.modify_button{
+	width:70px;
+	height:30px;
+	cursor: pointer;
+	background-color: #13a8ee;
+	border-radius: 6px;
+	font-size: 14pt;
+}
+.cancle_button{
+	width:120px;
+	height:50px;
+	cursor:pointer;
+	background-color: #13a8ee;
+	border-radius: 6px;
+	font-size: 14pt;
+}
+#cancle_plate{
+	text-align: center;
+}
+.info_list input{
+	border:2px solid #aaa;
+	border-radius: 5px;
+	font-size: 17px;
+	height:21px;
+}
+.info_plate{
+	overflow:hidden;
+	margin:20px 20px;
+	border:2px solid #ddd;
+	background-color: #efefefef;
+}
+.info_title{
+	background-color: #aaa;
+	padding-left:40px;
+	font-style: normal;
+	font-size: 1.5em;
+	height:40px;
+}
+.info_list div{
+	font-size:17px;
+	margin: 20px 0px;
+	float:left;
+}
+.order_detail input{
+	disabled:true;
+}
+#code_modify,#code_update{
+	display:none;
+	margin:20px 0px;
+}
+#code_modify select,#code_area,#code_check_code,#code_update input{
+	width:150px;
+	height:30px;
+	border:2px solid #aaa;
+	border-radius: 5px;
+}
+#code_modify button,#code_update button{
+	font-size: medium;
+	width:90px;
+	height:30px;
+	border:2px solid #aaa;
+	border-radius: 5px;
+	background-color: #13a8ee;
+}
+#code_update span,#code_modify span{
+	font-family:serif;
+	font-style: normal;
+	font-size: small;
+}
+#pages li{
+	display: inline;
+	border: 2px solid #0088ff;
+	padding: 4px 10px 4px 10px;
+}
+#proPages li{
+	display: inline;
+	border: 2px solid #0088ff;
+	padding: 4px 10px 4px 10px;
+}
+.active{
+	background-color: #0088ff;
+}
+#pages ul{
+	list-style-type: none;
+}
+#proPages ul{
+	list-style-type: none;
+}
+#pages a{
+	text-decoration: none;
+	line-height: 1.5em;
+	font-size: medium;
+}
+#proPages a{
+	text-decoration: none;
+	line-height: 1.5em;
+	font-size: medium;
+}
+#pages li:hover{
+	background-color: #ccdfdf;
+	cursor: pointer;
+}
+#proPages li:hover{
+	background-color: #ccdfdf;
+	cursor: pointer;
+}
+.highlighting{
+	background-color: #dfdfdf;
+}
+.view_button{
+	border:2px solid #aaa;
+	border-radius: 4px;
+	width:220px;
+	height:30px;
+}
+.code_modify_button{
+	width:110px;
+	height:36px;
+	cursor: pointer;
+	background-color: #13a8ee;
+	border-radius: 6px;
+	font-size: 16pt;
+	margin: 2px 2px;
+	display: none;
+}
+.updateCodeInfo{
+	margin:10px 20px;
+	border:2px solid #ddd;
+	height:350px;
+	overflow-x:scroll;
+	padding-top: 15px;
+	display: none;
+}

@@ -1,0 +1,27 @@
+<?xml version="1.1" encoding="UTF-8" ?>
+<ehcache>
+    <!-- 缓存存储的硬盘位置 -->
+    <diskStore path="java.io.tmpdir"/>
+
+    <!-- 
+        1、maxElementsInMemory：最大缓冲量
+        2、eternal：物理内存有Java虚拟机进行定时清理
+        3、timeToIdleSeconds：最大空闲时间
+        4、timeToLiveSeconds：最大存货时间
+        5、maxElementsOnDisk：最大溢出大磁盘上
+        6、diskPersistent：服务器重启之后是否有效
+        7、memoryStoreEvictionPolicy：换出策略
+     -->
+
+    <defaultCache
+            maxElementsInMemory="10000" 
+            eternal="false"
+            timeToIdleSeconds="120"
+            timeToLiveSeconds="120"
+            overflowToDisk="true"
+            maxElementsOnDisk="10000000"
+            diskPersistent="false"
+            diskExpiryThreadIntervalSeconds="120"
+            memoryStoreEvictionPolicy="LRU"
+            />
+</ehcache>

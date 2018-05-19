@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//itatis.apache.org//DTD Mapper 3.0//EN"
+	"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+	
+<mapper namespace="cn.bsnt.web.order.dao.OrderDao">
+	<select id="findOrderInfoByParams" resultType="map" parameterType="map">
+		select 
+			os.id as shopId,oi.id as orderId,oi.order_code as orderCode,os.ali_order_code as aliCode,oi.order_date as orderDate,
+			os.price as price,os.order_count as count,oi.receiver_name as receiverName,oi.receiver_phone as receiverPhone,
+			oi.receiver_add as receiverAdd,os.product_name as productName,os.size,os.color,oi.pay_chnl as payChnl,
+			os.product_code as productCode,os.logistics_company as logisticsCompany,os.logistics_code as logisticsCode,
+			os.transfer,oi.pay_status as status,os.remark,os.tuikuanbeizhu,pi.vender_url as url,pi.first_cost as firstCost
+		from 
+			(t_order_info as oi
+		join
+			t_order_shop as os on oi.order_code = os.order_code)
+		left join
+			t_product_info as pi on os.product_code = pi.product_code
+		<where>
+		<if test="area!=null">
+			oi.area like #{area}		
+		</if>
+		<if test="orderCode!=null">
+			oi.order_code = #{orderCode}
+		</if>
+		<if test="aliCode!=null">
+			and os.ali_order_code = #{aliCode}
+		</if>
+		<if test="orderDate!=null">
+			and oi.order_date like #{orderDate}
+		</if>
+		<if test="receiverName!=null">
+			and oi.receiver_name = #{receiverName}
+		</if>
+		<if test="productName!=null">
+			and os.product_name like #{productName}
+		</if>
+		<if test="logisticsCode!=null">
+			and os.logistics_code = #{logisticsCode}
+		</if>
+		<if test="startDate!=null and endDate!=null">
+			and oi.order_date between #{startDate} and #{endDate}
+		</if>
+		<if test="payChnl!=null">
+			and oi.pay_chnl = #{payChnl}
+		</if>
+		<if test="productCode!=null">
+			and os.product_code = #{productCode}
+		</if>
+		<if test="receiverAdd">
+			and oi.receiver_add like #{receiverAdd}
+		</if>
+		<if test="status0!=null">
+			and oi.pay_status = #{status0}
+		</if>
+		<if test="status1!=null">
+			and oi.pay_status = #{status1}
+		</if>
+		<if test="status2!=null">
+			and oi.pay_status = #{status2}
+		</if>
+		<if test="status3!=null">
+			and oi.pay_status = #{status3}
+		</if>
+		<if test="status4!=null">
+			and oi.pay_status = #{status4}
+		</if>
+		<if test="status5!=null">
+			and oi.pay_status = #{status5}
+		</if>
+		<if test="status6!=null">
+			and oi.pay_status = #{status6}
+		</if>
+		<if test="status7!=null">
+			and oi.pay_status = #{status7}
+		</if>
+		<if test="venderUrl!=null">
+			and pi.vender_url = #{venderUrl}
+		</if>
+		</where>
+		group by 
+			os.id
+		order by
+			os.id
+	</select>
+	<update id="updateOrderByParams" parameterType="map">
+		update 
+			t_order_info
+		set
+			<trim suffixOverrides=",">
+				<if test="receiverName!=null">
+					receiver_name = #{receiverName},
+				</if>
+				<if test="receiverPhone!=null">
+					receiver_phone = #{receiverPhone},
+				</if>
+				<if test="receiverAdd!=null">
+					receiver_add = #{receiverAdd},
+				</if>
+				<if test="payStatus!=null">
+					pay_status = #{payStatus}
+				</if>
+			</trim>
+		where 
+			id = #{orderId}
+	</update>
+</mapper>

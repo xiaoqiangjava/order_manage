@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//itatis.apache.org//DTD Mapper 3.0//EN"
+	"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+	
+<mapper namespace="cn.bsnt.web.order.dao.ProductDao">
+	<select id="findProductInfoByPrice" parameterType="map" resultType="map">
+		select 
+			other
+		from 
+			t_product_price
+		where
+			product_code = #{productCode} and price = #{price}
+	</select>
+	<select id="findProductPriceByPriceId" parameterType="string" resultType="map">
+		select
+			product_code productCode, other
+		form
+			t_product_price
+		where
+			id = #{id}
+	</select>
+	<select id="findProductPriceIdByOther" parameterType="map" resultType="map">
+		select
+			id
+		form
+			t_product_price
+		where
+			product_code = #{productCode} and other = #{other}
+	</select>
+	<select id="findProductPriceIdByProductCode" resultType="int">
+		select 	
+			id
+		from 
+			t_product_price
+		where
+			product_code = #{productCode}
+	</select>
+	<update id="updateProductPriceByParams" parameterType="map">
+		update
+			t_product_price
+		<set>
+			<trim suffixOverrides=",">
+				<if test="color!=null">
+					color = #{color},
+				</if>
+				<if test="productSize!=null">
+					size = #{productSize},
+				</if>
+				<if test="storeCount!=null">
+					store_count = #{storeCount},
+				</if>
+				<if test="price!=null and firstPrice!=null">
+					price = #{price},
+					first_price = #{firstPrice},
+				</if>
+			</trim>
+		</set>
+		<where>
+			id = #{productPriceId}		
+		</where> 
+	</update>
+	<select id="findProductInfoById" resultType="map">
+		select
+			product_code as productCode
+		from
+			t_product_info
+		where
+			id=#{id}
+	</select>
+	<update id="updateProductInfoByParams" parameterType="map">
+		update 
+			t_product_info
+		<set>
+			<trim suffixOverrides=",">
+				<if test="productName!=null">
+					product_name = #{productName},
+				</if>
+				<if test="brand!=null">
+					brand = #{brand},
+				</if>
+				<if test="artNumber!=null">
+					art_number = #{artNumber},
+				</if>
+				<if test="storeCount!=null">
+					store_count = #{storeCount},
+				</if>
+				<if test="venderUrl!=null">
+					vender_url = #{venderUrl},
+				</if>
+				<if test="price!=null and firstPrice!=null">
+					price = #{price},
+					first_cost = #{firstPrice},					
+				</if>
+				<if test="taobaoUrl!=null">
+					taobao_url = #{taobaoUrl},
+				</if>
+				<if test="kingUlr!=null">
+					taobao_daijinjuan = #{kingUrl},
+				</if>
+			</trim>
+		</set>
+		where 
+			id = #{productId}
+	</update>
+
+	<select id="findProductByParams" resultType="map" parameterType="map">
+		select 
+			pi.id as productId, pp.id as productPriceId, product_name as productName,add_date as addDate,brand,art_number as artNumber,
+			pp.store_count as storeCount,vender_url as venderUrl,taobao_url as taobaoUrl,taobao_daijinjuan as kingUrl,
+			pp.price as price, pp.size, pp.color
+		from
+			t_product_info as pi, t_product_price as pp
+		<where>
+			pi.product_code = pp.product_code 
+			<if test="productId!=null">
+				and pi.id = #{productId}
+			</if>
+			<if test="productName!=null">
+				and product_name like #{productName}
+			</if>
+			<if test="addDate!=null">
+				and add_date like #{addDate}
+			</if>
+			<if test="brand!=null">
+				and brand = #{brand}
+			</if>
+			<if test="artNumber!=null">
+				and art_number = #{artNumber}
+			</if>
+			<if test="storeCount!=null">
+				and pp.store_count = #{storeCount}
+			</if>
+			<if test="venderUrl!=null">
+				and vender_url = #{venderUrl}
+			</if>
+			<if test="startDate!=null and endDate!=null">
+				and add_date between #{startDate} and #{endDate}
+			</if>
+		</where>
+		order by pp.id
+	</select>
+	
+	<update id="updateProductByParams" parameterType="map">
+		update
+			t_order_shop
+		set
+			<trim suffixOverrides=",">
+				<if test="aliCode!=null">
+					ali_order_code = #{aliCode},
+				</if>
+				<if test="logisticsCode!=null">
+					logistics_code = #{logisticsCode},
+				</if>
+				<if test="logisticsCompany!=null">
+					logistics_company = #{logisticsCompany},
+				</if>
+				<if test="transfer!=null">
+					transfer = #{transfer}
+				</if>
+			</trim>
+		where 
+			id = #{shopId}
+	</update>
+</mapper>

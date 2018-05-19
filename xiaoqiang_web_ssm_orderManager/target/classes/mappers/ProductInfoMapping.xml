@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//itatis.apache.org//DTD Mapper 3.0//EN"
+	"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+	
+<mapper namespace="cn.bsnt.web.order.dao.ProductInfoDao">
+	<delete id="deleteProductByParams" parameterType="map">
+		delete from 
+			t_product_info
+		where 
+			id in
+			<foreach collection="idList" item="id" open="(" close=")" separator=",">
+				#{id}
+			</foreach>
+	</delete>
+	<delete id="deletePriceByCode" parameterType="string">
+		delete from
+			t_product_price
+		where 
+			product_code = #{productCode}
+	</delete>
+	<delete id="deletePictureByCode" parameterType="string">
+		delete from
+			t_product_picture
+		where 
+			product_code = #{productCode}
+	</delete>
+	<select id="findProductById" resultType="map">
+		select 
+			product_code as productCode
+		from 
+			t_product_info
+		where 
+			id = #{id}
+	</select>
+	<insert id="saveProductInfo" parameterType="map">
+		insert into
+			t_product_info
+			(product_code,product_name,class_id,lable_id,add_date,brand,art_number,size,color,first_cost,price,
+			old_price,store_count,vender_url,taobao_url,taobao_daijinjuan)
+		values
+			(#{productCode},#{productName},#{productClass},#{lable},#{addDate},#{brand},#{artNumber},#{size},#{color},
+			#{firstPrice},#{price},#{oldPrice},#{storeCount},#{venderUrl},#{taobaoUrl},#{kingUrl})
+	</insert>
+	<insert id="saveProductPrice" parameterType="map">
+		insert into
+			t_product_price
+			(product_code, class_id, size, color, first_price, price, other, store_count)
+		values
+			(#{productCode},#{productClass},#{size},#{color},#{firstPrice},#{price},#{identify},#{storeCount})
+	</insert>
+	<insert id="saveProductPicture" parameterType="map">
+		insert into
+			t_product_picture
+			(product_code,class_id,picture_url,is_main_pic)
+		values
+			(#{productCode},#{productClass},#{pictureUrl},#{mainPicture})
+	</insert>
+	<select id="findProductByName" resultType="map">
+		select 
+			product_code as productCode
+		from 
+			t_product_info
+		where 
+			product_name = #{productName}
+	</select>
+</mapper>

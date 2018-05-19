@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//itatis.apache.org//DTD Mapper 3.0//EN"
+	"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+	
+<mapper namespace="cn.bsnt.web.order.dao.RoleDao">
+	<select id="findRolesByUsername" resultType="cn.bsnt.web.order.entity.Role">
+		select 
+			tr.id as roleId, tr.t_role_name as roleName, tr.t_role_desc as roleDesc, tr.t_role_create_time as roleCreateTime,
+			tr.t_role_update_time as updateTime
+		from 
+			t_role as tr
+		where 
+			tr.id in (select
+						tur.t_role_id 
+					 from 
+						t_user_role as tur
+					 where
+						tur.t_user_id=(select
+									tu.t_user_id 
+								from
+									t_user as tu
+								where 
+									tu.t_user_name=#{username}
+								)
+					 )
+	</select>
+	<select id="findAllRoles" resultType="map">
+		select 
+			id, t_role_name as roleName, t_role_desc as roleDesc, t_role_create_time as createTime, t_role_update_time as updateTime
+		from 
+			t_role
+	</select>
+	
+	<update id="updateRoleByParams" parameterType="map">
+		update
+			t_role
+		<set>
+			<trim suffixOverrides=",">
+				<if test="roleName!=null">
+					t_role_name = #{roleName},
+				</if>
+				<if test="roleDesc!=null">
+					t_role_desc = #{roleDesc},
+				</if>
+				<if test="updateTime!=null">
+					t_role_update_time = #{updateTime},
+				</if>
+			</trim>
+		</set>
+		<where>
+			id = #{roleId}
+		</where>
+	</update>
+	
+	<insert id="createRole" parameterType="map">
+		insert into 
+			t_role
+			(t_role_name, t_role_desc, t_role_create_time, t_role_update_time)
+		values
+			(#{roleName}, #{roleDesc}, #{createTime}, #{createTime})
+	</insert>
+	
+	<delete id="deleteRoleByRoleId" parameterType="string">
+		delete from 
+			t_role
+		where 
+			id = #{roleId}
+	</delete>
+	
+	<select id="findRoleByRoleName" parameterType="string" resultType="cn.bsnt.web.order.entity.Role">
+		select 
+			id as roleId, t_role_name as roleName, t_role_desc as roleDesc
+		from
+			t_role
+		where 
+			t_role_name = #{roleName}
+	</select>
+	
+	<select id="findRolesByRoleInfo" parameterType="string" resultType="map">
+		select 
+			id, t_role_name as roleName, t_role_desc as roleDesc, t_role_create_time as createTime, t_role_update_time as updateTime
+		from 
+			t_role
+		where 
+			t_role_name like #{roleInfo} or t_role_desc like #{roleInfo}
+	</select>
+</mapper>

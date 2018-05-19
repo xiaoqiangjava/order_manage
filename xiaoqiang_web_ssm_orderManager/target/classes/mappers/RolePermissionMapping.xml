@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//itatis.apache.org//DTD Mapper 3.0//EN"
+	"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+	
+<mapper namespace="cn.bsnt.web.order.dao.RolePermissionDao">
+	<resultMap type="cn.bsnt.web.order.entity.RolePermission" id="findAllRolePermissionsResult">
+		<id property="id" column="roleId"/>
+		<association property="role" javaType="cn.bsnt.web.order.entity.Role">
+			<id property="roleId" column="roleId"/>
+			<result property="roleName" column="roleName"/>
+			<result property="roleDesc" column="roleDesc"/>
+			<result property="roleCreateTime" column="roleCreateTime"/>
+			<result property="roleUpdateTime" column="roleUpdateTime"/>
+		</association>
+		<collection property="permission" ofType="cn.bsnt.web.order.entity.Permission">
+			<id property="permissionId" column="permissionId"/>
+			<result property="permissionName" column="permissionName"/>
+			<result property="permissionDesc" column="permissionDesc"/>
+			<result property="permissionCreateTime" column="permissionCreateTime"/>
+			<result property="permissionUpdateTime" column="permissionUpdateTime"/>
+		</collection>
+	</resultMap>
+
+	<select id="findAllRolePermissions" parameterType="map" resultMap="findAllRolePermissionsResult">
+		select 
+			trp.id as id, tr.id as roleId, tr.t_role_name as roleName, tr.t_role_desc as roleDesc, tr.t_role_create_time as roleCreateTime, 
+			tr.t_role_update_time as roleUpdateTime, tp.id as permissionId, tp.t_permission_name as permissionName, tp.t_permission_desc as permissionDesc,
+			tp.t_permission_create_time as permissionCreateTime, tp.t_permission_update_time as permissionUpdateTime
+		from
+			t_role as tr
+		join
+			t_role_permission as trp
+		on
+			tr.id = trp.t_role_id
+		join
+			t_permission as tp
+		on
+			trp.t_permission_id = tp.id
+		<where>
+			<if test="rolePermissionInfo!=null">
+				tr.t_role_name like #{rolePermissionInfo} or tr.t_role_desc like #{rolePermissionInfo}
+			</if>
+		</where>
+		order by
+			tr.id
+	</select>
+	
+	<insert id="createRolePermission" parameterType="map">
+		insert into 
+			t_role_permission
+			(t_role_id, t_permission_id)
+		values
+			(#{roleId}, #{permissionId})
+	</insert>
+	
+	<delete id="deleteRolePermission" parameterType="map">
+		delete from
+			t_role_permission
+		where
+			t_role_id = #{roleId} and t_permission_id = #{permissionId}
+	</delete>
+	
+	<select id="findRolePermissionId" parameterType="map" resultType="int">
+		select
+			id
+		from	
+			t_role_permission
+		where 
+			t_role_id = #{roleId} and t_permission_id = #{permissionId}
+	</select>
+	
+	<insert id="insertRolePermission" parameterType="map">
+		insert into 
+			t_role_permission
+			(t_role_id, t_permission_id)
+		values
+			(#{roleId}, #{permissionId})
+	</insert>
+</mapper>

@@ -1,0 +1,77 @@
+服务器咱们用的北京的好雨云公司的
+北京好雨云股份有限公司
+账号  1817799889@qq.com
+密码bsnt@#20151208
+里面总共有9个项目
+jdbc.url=jdbc:mysql://mysql_baishi.bestnt.ali-sh-s1.goodrain.net:20174/bsnt_androidapp?useUnicode=true&characterEncoding=utf-8&autoReconnect=true
+
+git@code.goodrain.com:app/bestnt_grc16e90.git-->  源路径
+D:\Documents\bestnt_bgmanager是目标路径,目标路径可以自己修改名称
+baishi  是老数据库下的咱们的 电视商城和百付通的后台,现在已经不用了,开着只是防止有些商户没有更新最新版本的商城,内存只有 256
+第二个和第三个你不用管  没啥用处,关着就行,bsntmh是咱们的官网,绑定了咱们的域名的,www.baishinongtong.com
+当然这个也需要去重新做,现在就放着呢,ceshi这个是咱们手机商城app的后台,源码我一会发给你
+mysql_baishi是数据库   总的  里面有老数据库baishinongtong   也有新的数据库 也就是咱们现在用的t_androidapp.
+newbaifutongtv是咱们新数据库下的电视商城和百付通的后台
+sftp是一个上传工具,连接sourcetree用的,管理系统姚佩就是你写的那个
+咱们总共每个月要包月10G的内存,这内存是在财务中心的 ,打包购买里面去买,它默认是1G,买的时候把它改成10G,周期改成1月.
+如果是上一次购买的时间是26号  你在下个月25号直接点续费就ok,他就直接从余额里面吧相应的钱扣掉  就续费成功了
+如果超过时间了  那就只能重新购买了.包月这个的钱是从余额里面扣的,所以你要包月的话得保证余额里面有993.60元.
+他这个包月都有记录的.最近的一期是这个,所以说下次包月你在3月27号或者28号18点之前点击续费就ok,余额里面的钱，你得先充值上,再去包月
+包月的993.6元是直接从余额里面扣得  所以得保证余额里面有钱.钱不够你就支付宝充值.找财务报销.但是千万机着余额里面一定要存点钱,
+因为他每天都会扣费,不包月的话一天扣得是天价,包月之后  每小时扣个几分钱,一天也就一两块,所以在购买或者续费之后  得保证余额里面有一百多或两百多
+供其他扣费.
+他这边有两个联系人:一个叫 祁世垚,电话是18501255740  17338128699  QQ是29725649
+另外一个叫枫哥    电话是18610751917  电话是18610751917  QQ是81024267
+又不懂 的就问他俩,包括打war包上传到sourcetree,然后在好雨云这里重新部署就行,对应的项目里面.
+一旦商城或者百付通打不开了  第一时间去看好雨云这里是不是停掉了,然后赶紧联系枫哥,确认一下是不是他们那里出了问题,一般联系枫哥就行,不在了你在联系祁世垚.
+
+后台程序更改之后,你就导出导出格式就是war格式,然后把这个war格式保存了,打开sourcetree,找到对应的项目,右击打开资源管理器,把原来那个war删掉  把最新的
+放进去然后双击打开对应的项目  他会变化然后你提交,备注里写清楚几号的 干嘛的,然后提交就行
+出问题你就找枫哥,他会帮你,千万把包月的日期记着,别超时了..
+
+再就是新数据库,每张表干嘛的我都有文档写清楚了,不管是上传产品还是其他  照着表里的字段填就行.
+如果说商品比较多  就先做成excl  按数据库里的字段的顺序写一个excl 然后导入就ok.不会的问辛平哥  他会
+
+
+
+外包的公司资金没到账 先缓一缓,项目需求分析文档也有,到时候看领导怎么安排.安排了就跟我一样 到处找服务商.
+在猪八戒网上,发布需求,一回发给你,你用自己的QQ登录就行
+
+项目具体要求:
+具体要求：
+1.周期要求：2月
+2.详细功能描述：
+商城以及管理系统功能和市面上常见功能一样；
+营销模式/活动：0元/1元购、拼团;(参考微猫、拼多多)
+后台管理系统：上传产品，一、淘宝数据包格式为准建立数据库等，保证使用甩手等工具手动抓取的商品数据生成的淘宝数据包可以直接导入管理系统并使用；二、参考hghg168.cn（自动抓取）模式
+3.终端要求：
+电视端：智能电视商城app，遥控器鼠标操作，适配大屏
+移动端：Android端、IOS端商城
+管理系统：总管理系统、区域经销商管理系统、商户管理系统
+
+财务和姚佩那边需要的sql语句
+SELECT PAY_DATE as '交易时间',RECEIVER_NAME as '联系人',RECEIVER_PHONE as '联系方式',FIRST_PRICE_All as '总成本价(单个商品)',PRICE*ORDER_COUNT AS '总价(单个商品)',TUIKUANBEIZHU as '退款备注',(PRICE*ORDER_COUNT-FIRST_PRICE_All)*0.4 as '商户站点返佣',(PRICE*ORDER_COUNT-FIRST_PRICE_All)*0.1 as '代理商返佣', ALI_ORDER_CODE as '阿里订单号',t_order_info.ORDER_CODE as '平台订单号',PRODUCT_CODE as '商品编码',PRODUCT_NAME as '商品名称',SIZE as '尺寸',COLOR as '颜色',ORDER_COUNT as '数量',PRICE as '单价',RECEIVER_ADD as '收货地址',AREA as '区域',LOGISTICS_CODE as '物流号',LOGISTICS_COMPANY as '物流公司' from t_order_info join t_order_shop on t_order_info.ORDER_CODE=t_order_shop.ORDER_CODE where PAY_STATUS=1 and PAY_DATE like '%2017-02-23%'
+财务用的:
+SELECT PAY_DATE as '交易时间',RECEIVER_NAME as '联系人',
+RECEIVER_PHONE as '联系方式',FIRST_PRICE_All as '总成本价(单个商品)',
+PRICE*ORDER_COUNT AS '总价(单个商品)',TUIKUANBEIZHU as '退款备注',
+(PRICE*ORDER_COUNT-FIRST_PRICE_All)*0.4 as '商户站点返佣',(PRICE*ORDER_COUNT-FIRST_PRICE_All)*0.1 as '代理商返佣', 
+ALI_ORDER_CODE as '阿里订单号',t_order_info.ORDER_CODE as '平台订单号',PRODUCT_CODE as '商品编码',PRODUCT_NAME as '商品名称',
+SIZE as '尺寸',COLOR as '颜色',ORDER_COUNT as '数量',PRICE as '单价',RECEIVER_ADD as '收货地址',
+AREA as '区域',LOGISTICS_CODE as '物流号',LOGISTICS_COMPANY as '物流公司' 
+from t_order_info join t_order_shop on t_order_info.ORDER_CODE=t_order_shop.ORDER_CODE 
+where PAY_STATUS=1 and PAY_DATE like '%2017-02-23%'
+
+上传产品的,颜色  尺寸  在商品表里 用英文逗号连接,在套餐表里,所有可能都得写出来,图片表没啥说的,一个商品6张图,5张小图  一张长图
+对应商品编码就行,还有类别 ,classid,上传产品最容易出错,辛平哥都会,你不懂问他,还有就是 每个月的统计,你自己写sql去统计,排成表.
+我这里有前几个月的,照着做就行
+
+还有就是,问枫哥要发票,他会寄过来
+
+在使用map作为mybatis参数时,如果map中有size是不行的,会报错PersistenceException:java.lang.String cannot be cast to java.lang.Integer,将
+键值size的值变成其他的如productSize 解决问题
+
+
+
+
+

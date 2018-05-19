@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//itatis.apache.org//DTD Mapper 3.0//EN"
+	"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+	
+<mapper namespace="cn.bsnt.web.order.dao.CodeDao">
+	<update id="updateCodeByParams" parameterType="map">
+		update
+			t_user
+		<set>
+			<trim suffixOverrides=",">
+				<if test="codeNick!=null">
+					t_user_nick = #{codeNick},
+				</if>
+			</trim>
+		</set>
+		<where>
+			t_user_id = #{codeId}
+		</where>
+	</update>
+	<select id="findAllCodes" resultType="map">
+		select 
+			t_user_id as id, t_user_name as name, t_user_nick as nick,t_user_create_time as createTime
+		from
+			t_user
+	</select>
+	<select id="findCodeByCodeInfo" parameterType="string" resultType="map">
+		select
+			t_user_id as id, t_user_name as name, t_user_nick as nick, t_user_create_time as createTime
+		from 
+			t_user
+		where 
+			t_user_name like #{codeInfo} or t_user_nick like #{codeInfo}
+	</select>
+	<delete id="deleteCodeByCodeId" parameterType="string">
+		delete from 
+			t_user
+		where
+			t_user_id = #{codeId}
+	</delete>
+</mapper>

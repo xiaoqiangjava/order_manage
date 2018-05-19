@@ -1,0 +1,79 @@
+#new_plate {
+	border: 2px solid #999;
+	width: 95%;
+	margin: 15px auto;
+}
+
+.new {
+	background-color: #aaa;
+	padding-left: 40px;
+	font-size: 1.5em;
+	font-style: normal;
+}
+
+.new_option {
+	padding-left: 40px;
+	overflow: hidden;
+}
+
+#new_plate input {
+	border: 2px solid #aaa;
+	border-radius: 4px;
+	height: 27px;
+	margin-top: 10px;
+	margin-right: 30px;
+}
+
+.new_option div {
+	font-size: medium;
+	margin-top: 5px;
+}
+
+.new_float {
+	float: left;
+}
+
+textarea {
+	border:2px solid #aaa;
+	border-radius:4px;
+	width: 400px;
+	height: 50px;
+	margin-top: 10px;
+	font-size: medium;
+	overflow: auto;
+	margin-right: 29px;
+	vertical-align: top;
+}
+#textarea{
+	line-height: 50px;
+}
+.new_no_float {
+	clear: both;
+}
+#picture_float{
+	overflow: hidden;
+}
+#picture_float div{
+	float: left;
+}
+#quality_submit,#new_submit{
+	background-color: #13a8ee;
+	border: 1px solid #eee;
+	margin: 10px auto;
+	font-size:14pt;
+	border-radius: 6px;
+	cursor: pointer;
+}
+#quality_lable,#new_lable{
+	border:2px solid #aaa;
+	border-radius: 4px;
+	width: 92px;
+	height:30px;
+	margin-top:10px;
+	margin-right: 30px;
+	text-align: center;
+}
+input[type="file"]{
+	background-color: #fff;
+	padding-top: 3.5px;
+}

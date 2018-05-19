@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//itatis.apache.org//DTD Mapper 3.0//EN"
+	"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+	
+<mapper namespace="cn.bsnt.web.order.dao.PermissionDao">
+	<select id="findPermissionsByRoleId" resultType="cn.bsnt.web.order.entity.Permission">
+		select 
+			tp.id as permissionId, tp.t_permission_name as permissionName, tp.t_permission_desc as permissionDesc,
+			tp.t_permission_create_time as permissionCreateTime, tp.t_permission_update_time as permissionUpdateTime
+		from 
+			t_permission as tp
+		where 
+			tp.id in (select
+						trp.t_permission_id
+					 from
+					 	t_role_permission as trp
+					 where
+					 	trp.t_role_id=#{roleId}
+					)
+	</select>
+	
+	<select id="findAllPermissions" resultType="map">
+		select
+			id, t_permission_name as permissionName, t_permission_desc as permissionDesc, t_permission_create_time as createTime,
+			t_permission_update_time as updateTime
+		from
+			t_permission
+	</select>
+	
+	<update id="updatePermission" parameterType="map">
+		update
+			t_permission
+			<set>
+				<trim suffixOverrides=",">
+					<if test="permissionName!=null">
+						t_permission_name = #{permissionName},
+					</if>
+					<if test="permissionDesc!=null">
+						t_permission_desc = #{permissionDesc},
+					</if>
+					<if test="updateTime!=null">
+						t_permission_update_time = #{updateTime},
+					</if>
+				</trim>
+			</set>
+			<where>
+				id = #{permissionId}
+			</where>
+	</update>
+	<update id="createPermission" parameterType="map">
+		insert into
+			t_permission
+			(t_permission_name, t_permission_desc, t_permission_create_time, t_permission_update_time)
+		values
+			(#{permissionName}, #{permissionDesc}, #{createTime}, #{createTime})
+	</update>
+	<select id="findPermissionByPermissionName" parameterType="string" resultType="cn.bsnt.web.order.entity.Permission">
+		select
+			id as permissionId, t_permission_name as permissionName, t_permission_desc as permissionDesc
+		from 
+			t_permission
+		where 
+			t_permission_name = #{permissionName}
+	</select>
+	
+	<delete id="deletePermissionById" parameterType="string">
+		delete from
+			t_permission
+		where 
+			id = #{permissionId}
+	</delete>
+	
+	<select id="findPermissionsByPermissionInfo" parameterType="string" resultType="map">
+		select
+			id, t_permission_name as permissionName, t_permission_desc as permissionDesc, t_permission_create_time as createTime,
+			t_permission_update_time as updateTime
+		from
+			t_permission
+		where
+			t_permission_name like #{permissionInfo} or t_permission_desc like #{permissionInfo}
+	</select>
+</mapper>

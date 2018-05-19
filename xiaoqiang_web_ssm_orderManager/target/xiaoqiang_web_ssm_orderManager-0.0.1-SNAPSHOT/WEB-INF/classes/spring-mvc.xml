@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context" 
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"  
+	xmlns:jee="http://www.springframework.org/schema/jee" 
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.2.xsd
+		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.2.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa-1.3.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd">
+	
+	<context:component-scan base-package="cn.bsnt.web.order.controller"/>
+	<context:component-scan base-package="com.geccocrawler.gecco.spring"/>
+	<context:component-scan base-package="xiaoqiang.web.spring.gecco.demo"/>
+	<mvc:annotation-driven/>
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/product/*"/>
+			<mvc:mapping path="/productInfo/*"/>
+			<mvc:mapping path="/order/*"/>
+			<mvc:mapping path="/code/*"/>
+			<mvc:mapping path="/gecco/*"/>
+			<mvc:mapping path="/permission/*"/>
+			<mvc:mapping path="/role/*"/>
+			<mvc:mapping path="/rolePermission/*"/>
+			<mvc:mapping path="/userRole/*"/>
+			<ref bean="accessInterceptor"/>
+		</mvc:interceptor>
+	</mvc:interceptors>
+	<!-- 支持文件上传 -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="defaultEncoding" value="UTF-8"/>
+		<property name="maxUploadSize" value="104857600"></property>
+	</bean>
+	 
+	<!-- 开启aop,对类进行代理 -->
+	<aop:config proxy-target-class="true"/>
+	<!-- 开启shiro注解 -->
+	<bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+		<property name="securityManager" ref="securityManager"/>
+	</bean>
+	
+</beans>
+
+
+
+
+
+
+
+
+
+
+
+
+
